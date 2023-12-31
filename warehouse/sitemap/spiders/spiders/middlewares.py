@@ -4,11 +4,11 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 # useful for handling different item types with a single interface
-from itemadapter import ItemAdapter, is_item  # noqa: F401
+from itemadapter import ItemAdapter, is_item  # noqa
 from scrapy import signals
 
 
-class ScraperSpiderMiddleware:
+class SpidersSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -55,7 +55,7 @@ class ScraperSpiderMiddleware:
         spider.logger.info("Spider opened: %s" % spider.name)
 
 
-class ScraperDownloaderMiddleware:
+class SpidersDownloaderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.

@@ -2,6 +2,11 @@ from django.db import models
 
 
 class BaseModel(models.Model):
+    class Meta:
+        abstract = True
+
+
+class BaseTimestampModel(BaseModel):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -9,7 +14,7 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class BaseBlockSignature(BaseModel):
+class BaseBlockSignature(BaseTimestampModel):
     signature = models.CharField(max_length=255, unique=True)
     block_name = models.CharField(
         max_length=255,

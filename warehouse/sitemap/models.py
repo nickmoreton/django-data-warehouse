@@ -1,9 +1,9 @@
 from django.db import models
 
-from warehouse.core.models import BaseBlockSignature, BaseModel
+from warehouse.core.models import BaseBlockSignature, BaseTimestampModel
 
 
-class Sitemap(BaseModel):
+class Sitemap(BaseTimestampModel):
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -14,7 +14,7 @@ class Sitemap(BaseModel):
         verbose_name_plural = "Sitemaps"
 
 
-class Urls(BaseModel):
+class Urls(BaseTimestampModel):
     sitemap = models.ForeignKey(Sitemap, on_delete=models.CASCADE)
     url = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
@@ -30,7 +30,7 @@ class Urls(BaseModel):
         verbose_name_plural = "URLs"
 
 
-class Page(BaseModel):
+class Page(BaseTimestampModel):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True, null=True)
     tag_map = models.TextField(blank=True, null=True)

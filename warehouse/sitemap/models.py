@@ -43,7 +43,33 @@ class PageData(BaseTimestampModel):
         verbose_name_plural = "Pages Data"
 
 
+def get_signature_choices():
+    return (
+        # These choice may be generated elsewhere later on
+        # they don't really apply to anything specific at the moment.
+        ("", ""),
+        ("heading_block", "Heading"),
+        ("rich_text_block", "Rich Text"),
+        ("image_block", "Image"),
+        ("gallery_block", "Gallery"),
+        ("video_block", "Video"),
+        ("audio_block", "Audio"),
+        ("quote_block", "Quote"),
+        ("code_block", "Code"),
+        ("html_block", "HTML"),
+        ("markdown_block", "Markdown"),
+        ("embed_block", "Embed"),
+    )
+
+
 class Signature(BaseBlockSignature):
+    block_name = models.CharField(  # required field for django admin list_display and list_filter
+        max_length=255,
+        blank=True,
+        null=True,
+        choices=get_signature_choices(),
+    )
+
     class Meta:
         verbose_name = "Signature"
         verbose_name_plural = "Signatures"

@@ -1,6 +1,6 @@
 from django.db import models
 
-from warehouse.core.models import BaseModel
+from warehouse.core.models import BaseBlockSignature, BaseModel
 
 
 class Sitemap(BaseModel):
@@ -41,3 +41,10 @@ class Page(BaseModel):
     class Meta:
         verbose_name = "Page"
         verbose_name_plural = "Pages"
+
+
+class Signature(BaseBlockSignature):
+    class Meta:
+        verbose_name = "Signature"
+        verbose_name_plural = "Signatures"
+        ordering = ["-signature"]

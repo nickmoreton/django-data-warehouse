@@ -21,6 +21,7 @@ class BaseAdmin(admin.ModelAdmin):
         first_fields = [
             "name",
             "title",
+            "signature",
         ]  # these fields will be displayed first
         last_fields = [  # these fields will be displayed last
             "created_at",

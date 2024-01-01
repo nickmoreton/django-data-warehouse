@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from warehouse.core.admin import BaseAdmin
 
-from .models import Page, Sitemap, Urls
+from .models import Page, Signature, Sitemap, Urls
 
 
 class UrlsInline(admin.TabularInline):
@@ -32,3 +32,13 @@ class PageAdmin(BaseAdmin):
 
 
 admin.site.register(Page, PageAdmin)
+
+
+class SignatureAdmin(BaseAdmin):
+    list_editable = ("block_name",)
+    list_display_links = ("signature",)
+    list_per_page = 500
+    list_filter = ("block_name",)
+
+
+admin.site.register(Signature, SignatureAdmin)

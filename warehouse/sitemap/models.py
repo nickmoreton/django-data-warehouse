@@ -1,7 +1,9 @@
 from django.db import models
 
+from warehouse.core.models import BaseModel
 
-class Sitemap(models.Model):
+
+class Sitemap(BaseModel):
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -12,13 +14,11 @@ class Sitemap(models.Model):
         verbose_name_plural = "Sitemaps"
 
 
-class Urls(models.Model):
+class Urls(BaseModel):
     sitemap = models.ForeignKey(Sitemap, on_delete=models.CASCADE)
     url = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     wp_id = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     last_scraped_at = models.DateTimeField(null=True, blank=True)
     page_id = models.IntegerField(null=True, blank=True)
 
@@ -30,7 +30,7 @@ class Urls(models.Model):
         verbose_name_plural = "URLs"
 
 
-class Page(models.Model):
+class Page(BaseModel):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True, null=True)
     tag_map = models.TextField(blank=True, null=True)

@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from warehouse.core.admin import BaseAdmin
+
 from .models import Page, Sitemap, Urls
 
 
@@ -8,7 +10,7 @@ class UrlsInline(admin.TabularInline):
     extra = 1
 
 
-class SitemapAdmin(admin.ModelAdmin):
+class SitemapAdmin(BaseAdmin):
     list_display = ("name",)
     inlines = [UrlsInline]
 
@@ -16,8 +18,8 @@ class SitemapAdmin(admin.ModelAdmin):
 admin.site.register(Sitemap, SitemapAdmin)
 
 
-class UrlsAdmin(admin.ModelAdmin):
-    list_display = ("url", "title", "wp_id", "last_scraped_at")
+class UrlsAdmin(BaseAdmin):
+    list_display = ("url", "title", "wp_id", "last_scraped_at", "page_id")
     search_fields = ("url", "title", "wp_id")
     list_filter = ("sitemap__name",)
 
@@ -25,7 +27,7 @@ class UrlsAdmin(admin.ModelAdmin):
 admin.site.register(Urls, UrlsAdmin)
 
 
-class PageAdmin(admin.ModelAdmin):
+class PageAdmin(BaseAdmin):
     search_fields = ("title",)
 
 

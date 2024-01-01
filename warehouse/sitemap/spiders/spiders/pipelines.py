@@ -46,19 +46,17 @@ class ScrapePagePipeline:
         # Get the ScrapeLogEntry object for updating
         # and finding the BlogPost object ig it exists
         wp_id = adapter["wp_id"]
-        log_obj = Urls.objects.filter(wp_id=wp_id).first()
+        url_obj = Urls.objects.filter(wp_id=wp_id).first()
 
         # May want to only update after a certain amount of time
         # has passed since last scrape
         # or if the page has been updated since last scrape?
-        page = Page.objects.create(title=title, content=content)
-        content = page.content
-        tag_map = get_tag_map(content)
-        page.tag_map = tag_map
-        page.save()
+        obj, updated = Page.objects.update_or_create(
+            title=title, defaults={"content": content, "tag_map": get_tag_map(content)}
+        )
 
-        log_obj.page_id = page.id
-        log_obj.last_scraped_at = datetime.datetime.now()
-        log_obj.save()
+        url_obj.page_id = obj.id
+        url_obj.last_scraped_at = datetime.datetime.now()
+        url_obj.save()
 
         return item

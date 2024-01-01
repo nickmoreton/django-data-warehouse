@@ -14,7 +14,7 @@ class Sitemap(BaseTimestampModel):
         verbose_name_plural = "Sitemaps"
 
 
-class Urls(BaseTimestampModel):
+class SitemapUrl(BaseTimestampModel):
     sitemap = models.ForeignKey(Sitemap, on_delete=models.CASCADE)
     url = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
@@ -30,7 +30,7 @@ class Urls(BaseTimestampModel):
         verbose_name_plural = "URLs"
 
 
-class Page(BaseTimestampModel):
+class PageData(BaseTimestampModel):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True, null=True)
     tag_map = models.TextField(blank=True, null=True)
@@ -39,8 +39,8 @@ class Page(BaseTimestampModel):
         return self.title
 
     class Meta:
-        verbose_name = "Page"
-        verbose_name_plural = "Pages"
+        verbose_name = "Page Data"
+        verbose_name_plural = "Pages Data"
 
 
 class Signature(BaseBlockSignature):

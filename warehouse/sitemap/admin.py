@@ -2,11 +2,11 @@ from django.contrib import admin
 
 from warehouse.core.admin import BaseAdmin
 
-from .models import Page, Signature, Sitemap, Urls
+from .models import PageData, Signature, Sitemap, SitemapUrl
 
 
 class UrlsInline(admin.TabularInline):
-    model = Urls
+    model = SitemapUrl
     extra = 1
 
 
@@ -24,14 +24,14 @@ class UrlsAdmin(BaseAdmin):
     list_filter = ("sitemap__name",)
 
 
-admin.site.register(Urls, UrlsAdmin)
+admin.site.register(SitemapUrl, UrlsAdmin)
 
 
 class PageAdmin(BaseAdmin):
     search_fields = ("title",)
 
 
-admin.site.register(Page, PageAdmin)
+admin.site.register(PageData, PageAdmin)
 
 
 class SignatureAdmin(BaseAdmin):

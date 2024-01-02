@@ -103,60 +103,60 @@ class SignatureBuilder:
 
 # Example Usage
 
-if __name__ == "__main__":
-    html_content = """
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>My Title</title>
-        </head>
-        <body>
-            <header>
-                <div>
-                    <h1>This is sample text</h1>
-                    <p>Some random text</p>
-                </div>
-            </header>
+# if __name__ == "__main__":
+#     html_content = """
+#     <!DOCTYPE html>
+#     <html>
+#         <head>
+#             <title>My Title</title>
+#         </head>
+#         <body>
+#             <header>
+#                 <div>
+#                     <h1>This is sample text</h1>
+#                     <p>Some random text</p>
+#                 </div>
+#             </header>
 
-            <main>
-                <h1 class="title">This is sample text</h1>
-                <div>
-                    <div>
-                        <h2>This is sample text</h2>
-                        <p>Some random text</p>
-                    </div>
-                </div>
-                <div>
-                    <h1>This is sample text</h1>
-                    <p>Some random text</p>
-                </div>
-                <p>Some random text</p>
-                <p>Some random text</p>
-            </main>
+#             <main>
+#                 <h1 class="title">This is sample text</h1>
+#                 <div>
+#                     <div>
+#                         <h2>This is sample text</h2>
+#                         <p>Some random text</p>
+#                     </div>
+#                 </div>
+#                 <div>
+#                     <h1>This is sample text</h1>
+#                     <p>Some random text</p>
+#                 </div>
+#                 <p>Some random text</p>
+#                 <p>Some random text</p>
+#             </main>
 
-            <footer>
-                <h1>This is sample text</h1>
-                <p>Some random text</p>
-            </footer>
-        </body>
-    </html>
-    """
+#             <footer>
+#                 <h1>This is sample text</h1>
+#                 <p>Some random text</p>
+#             </footer>
+#         </body>
+#     </html>
+#     """
 
-    soup = BeautifulSoup(html_content, "html.parser")
-    signature_builder = SignatureBuilder(soup, "main").run()
-    signatures = signature_builder.get_signatures
-    assert isinstance(signatures, list)
-    assert signatures == ["h1", "div>div>h2", "div>div>p", "div>h1", "div>p", "p", "p"]
-    unique_signatures = signature_builder.get_unique_signatures
-    assert isinstance(unique_signatures, list)
-    assert unique_signatures == [
-        "h1",
-        "div>div>h2",
-        "div>div>p",
-        "div>h1",
-        "div>p",
-        "p",
-    ]
+#     soup = BeautifulSoup(html_content, "html.parser")
+#     signature_builder = SignatureBuilder(soup, "main").run()
+#     signatures = signature_builder.get_signatures
+#     assert isinstance(signatures, list)
+#     assert signatures == ["h1", "div>div>h2", "div>div>p", "div>h1", "div>p", "p", "p"]
+#     unique_signatures = signature_builder.get_unique_signatures
+#     assert isinstance(unique_signatures, list)
+#     assert unique_signatures == [
+#         "h1",
+#         "div>div>h2",
+#         "div>div>p",
+#         "div>h1",
+#         "div>p",
+#         "p",
+#     ]
 
-    # Optional debug
-    # signature_builder = SignatureBuilder(soup, "main").run(debug=True)
+# Optional debug
+# signature_builder = SignatureBuilder(soup, "main").run(debug=True)

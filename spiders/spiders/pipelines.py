@@ -16,13 +16,9 @@ class SitemapPipeline:
         url = adapter["url"]
         title = adapter["title"]
 
-        obj, created = SitemapUrl.objects.get_or_create(
+        SitemapUrl.objects.get_or_create(
             wp_id=wp_id, defaults={"url": url, "title": title, "sitemap_id": 1}
         )
-
-        # logging.info(f"Created {wp_id} with {url} and {title} at ID: {obj.id}") if created else logging.info(
-        #     f"Updated {wp_id} with {url} and {title} at ID: {obj.id}"
-        # )
 
         return item
 

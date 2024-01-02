@@ -8,7 +8,7 @@ from warehouse.sitemap.models import PageData, SitemapUrl
 from warehouse.sitemap.signatures import SignatureBuilder
 
 
-class ScrapeLogPipeline:
+class SitemapPipeline:
     @sync_to_async
     def process_item(self, item, spider):
         adapter = ItemAdapter(item)
@@ -27,7 +27,7 @@ class ScrapeLogPipeline:
         return item
 
 
-class ScrapePagePipeline:
+class PagesPipeline:
     @sync_to_async
     def process_item(self, item, spider):
         adapter = ItemAdapter(item)

@@ -29,6 +29,14 @@ class SitemapUrl(BaseTimestampModel):
         verbose_name = "URL"
         verbose_name_plural = "URLs"
 
+    @staticmethod
+    def spider_start_urls():
+        return [entry.url for entry in SitemapUrl.objects.all()]
+
+    @staticmethod
+    def get_wp_ids():
+        return {entry.url: entry.wp_id for entry in SitemapUrl.objects.all()}
+
 
 class PageData(BaseTimestampModel):
     title = models.CharField(max_length=255)

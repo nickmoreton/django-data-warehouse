@@ -11,7 +11,7 @@ class SitemapSpider(scrapy.Spider):
 
     custom_settings = {
         "ITEM_PIPELINES": {
-            "spiders.pipelines.ScrapeLogPipeline": 300,
+            "spiders.pipelines.SitemapPipeline": 300,
         },
     }
 

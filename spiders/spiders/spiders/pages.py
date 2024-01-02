@@ -5,20 +5,19 @@ from warehouse.sitemap.models import SitemapUrl
 
 from ..items import PageItem
 
-objects = SitemapUrl.objects.all()
-obj_dict = {}
-for entry in objects:
-    obj_dict[entry.url] = entry.__dict__
-
 
 class PagesSpider(scrapy.Spider):
+    def __init__(self, *args, **kwargs):
+        super(PagesSpider, self).__init__(*args, **kwargs)
+        self.wp_ids_lookup = SitemapUrl.get_wp_ids()
+
     name = "pages"
     allowed_domains = ["localhost"]
-    start_urls = [entry.url for entry in objects]
+    start_urls = SitemapUrl.spider_start_urls()
 
     custom_settings = {
         "ITEM_PIPELINES": {
-            "spiders.pipelines.ScrapePagePipeline": 300,
+            "spiders.pipelines.PagesPipeline": 300,
         },
     }
 
@@ -29,5 +28,5 @@ class PagesSpider(scrapy.Spider):
         loader = ItemLoader(item=PageItem())
         loader.add_value("title", title)
         loader.add_value("content", content)
-        loader.add_value("wp_id", obj_dict[response.url]["wp_id"])
+        loader.add_value("wp_id", self.wp_ids_lookup[response.url])
         yield loader.load_item()

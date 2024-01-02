@@ -1,11 +1,11 @@
 import scrapy
 from scrapy.loader import ItemLoader
 
-from warehouse.sitemap.models import Urls
+from warehouse.sitemap.models import SitemapUrl
 
 from ..items import PageItem, UrlItem
 
-objects = Urls.objects.all()
+objects = SitemapUrl.objects.all()
 obj_dict = {}
 for entry in objects:
     obj_dict[entry.url] = entry.__dict__

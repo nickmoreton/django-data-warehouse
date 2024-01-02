@@ -13,7 +13,7 @@ from pathlib import Path
 
 import django
 
-base_dir = Path.cwd().parent.parent.parent.__str__()
+base_dir = Path.cwd().parent.__str__()
 sys.path.append(base_dir)
 
 os.environ["DJANGO_SETTINGS_MODULE"] = "warehouse.settings.base"

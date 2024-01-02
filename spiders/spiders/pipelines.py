@@ -4,7 +4,7 @@ from asgiref.sync import sync_to_async
 from bs4 import BeautifulSoup
 from itemadapter import ItemAdapter
 
-from warehouse.sitemap.models import Page, Urls
+from warehouse.sitemap.models import PageData, SitemapUrl
 from warehouse.sitemap.signatures import SignatureBuilder
 
 
@@ -16,7 +16,7 @@ class ScrapeLogPipeline:
         url = adapter["url"]
         title = adapter["title"]
 
-        obj, created = Urls.objects.get_or_create(
+        obj, created = SitemapUrl.objects.get_or_create(
             wp_id=wp_id, defaults={"url": url, "title": title, "sitemap_id": 1}
         )
 
@@ -46,12 +46,12 @@ class ScrapePagePipeline:
         # Get the ScrapeLogEntry object for updating
         # and finding the BlogPost object ig it exists
         wp_id = adapter["wp_id"]
-        url_obj = Urls.objects.filter(wp_id=wp_id).first()
+        url_obj = SitemapUrl.objects.filter(wp_id=wp_id).first()
 
         # May want to only update after a certain amount of time
         # has passed since last scrape
         # or if the page has been updated since last scrape?
-        obj, updated = Page.objects.update_or_create(
+        obj, updated = PageData.objects.update_or_create(
             title=title, defaults={"content": content, "tag_map": get_tag_map(content)}
         )
 
